@@ -1,9 +1,13 @@
 # tests/test_views.py
+
+import unittest
+
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 from django.urls import reverse
 from .models import ChatRoom
 from .serializers import ChartRoomSerializer
+from .views import sumNumbers
 
 class ChatRoomViewSetTest(APITestCase):
     def setUp(self):
@@ -46,3 +50,28 @@ class ChatRoomViewSetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(ChatRoom.objects.count(), 0)
 # Create your tests here.
+
+class TestSumNumbers(unittest.TestCase):
+
+    def test_sum_in_order(self):
+        self.assertEqual(sumNumbers(1, 5), 15, "Should be 15")
+        self.assertEqual(sumNumbers(3, 7), 25, "Should be 25")
+
+    def test_sum_reversed_order(self):
+        self.assertEqual(sumNumbers(5, 1), 15, "Should be 15")
+        self.assertEqual(sumNumbers(7, 3), 25, "Should be 25")
+
+    def test_sum_same_number(self):
+        self.assertEqual(sumNumbers(4, 4), 4, "Should be 4")
+        self.assertEqual(sumNumbers(0, 0), 0, "Should be 0")
+
+    def test_sum_negative_numbers(self):
+        self.assertEqual(sumNumbers(-3, 3), 0, "Should be 0")
+        self.assertEqual(sumNumbers(-5, -1), -15, "Should be -15")
+
+    def test_sum_negative_and_positive(self):
+        self.assertEqual(sumNumbers(-2, 2), 0, "Should be 0")
+        self.assertEqual(sumNumbers(-3, 1), -5, "Should be -5")
+
+if __name__ == '__main__':
+    unittest.main()
