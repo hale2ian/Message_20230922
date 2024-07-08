@@ -141,6 +141,8 @@ CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+
 CORS_ALLOWED_ORIGINS = [
 
     'http://localhost:3000',
