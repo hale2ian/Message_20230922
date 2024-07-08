@@ -4,8 +4,6 @@ from rest_framework.response import Response
 
 
 # Create your views here.
-
-# Create your views here.
 def sumNumbers(start_num, end_num):
     if start_num > end_num:
         start_num, end_num = end_num, start_num
